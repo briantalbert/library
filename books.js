@@ -1,3 +1,5 @@
+let myLibrary = [];
+
 function Book(title, author, pages, read){
     this.title = title
     this.author = author
@@ -11,7 +13,15 @@ Book.prototype.info = function() {
         return infoString
 }
 
-const hhg = new Book("Hitchhiker's Guide", "Adams", 420, true)
+function addBookToLibrary(book) {
+    myLibrary.push(book)
+}
 
-console.log(hhg.info())
+const lotr = new Book("Lord of the Rings", "Tolkein", 300, true)
+const hhg = new Book("Hitchhiker's Guide", "Adams", 250, true)
+const wok = new Book("Way of Kings", "Sanderson", 1000, true)
+
+addBookToLibrary(lotr)
+addBookToLibrary(hhg)
+addBookToLibrary(wok)
 
