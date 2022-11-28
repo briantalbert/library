@@ -1,5 +1,12 @@
 let myLibrary = [];
 
+const submit = document.querySelector('.add')
+submit.addEventListener('click', () => {
+    const newBook = createBookObject()
+    addBookToLibrary(newBook)
+    addToPage(newBook)
+})
+
 function Book(title, author, pages, read){
     this.title = title
     this.author = author
@@ -17,41 +24,15 @@ function addBookToLibrary(book) {
     myLibrary.push(book)
 }
 
-function addToPage2(book) {
-    const parent = document.querySelector('.booklist')
-    const card = document.createElement('div')
-    card.classList.add('book-card')
-    parent.appendChild(card)
-
-    const bookTitle = document.createElement('span')
-    const bookAuthor = document.createElement('span')
-    const bookPages = document.createElement('span')
-    const bookRead = document.createElement('span')
-
-    bookTitle.classList.add('title')
-    bookAuthor.classList.add('author')
-    bookPages.classList.add('pages')
-    bookRead.classList.add('read-status')
-
-    bookTitle.textContent = book.title
-    bookAuthor.textContent = book.author
-    bookPages.textContent = book.pages + " pages"
-    bookRead.textContent = book.read ? "Read" : "Not Read Yet"
-
-    card.appendChild(bookTitle)
-    card.appendChild(bookAuthor)
-    card.appendChild(bookPages)
-    card.appendChild(bookRead)
-
-
-}
 
 function addToPage(book) {
     const parent = document.querySelector('.booklist')
     const card = document.createElement('div')
-    card.classList.add('book-info')
-    const bookDiv = document.createElement('div')
-    bookDiv.classList.add('book-card')
+    const bookInfo = document.createElement('div')
+    bookInfo.classList.add('book-info')
+    card.classList.add('book-card')
+    bookInfo.appendChild(card)
+    parent.appendChild(bookInfo)
 
     const bookTitle = document.createElement('span')
     const bookAuthor = document.createElement('span')
@@ -68,17 +49,28 @@ function addToPage(book) {
     bookPages.textContent = book.pages + " pages"
     bookRead.textContent = book.read ? "Read" : "Not Read Yet"
 
-    bookDiv.appendChild(bookTitle)
-    bookDiv.appendChild(bookAuthor)
-    bookDiv.appendChild(bookPages)
-    bookDiv.appendChild(bookRead)
-
+    card.classList.add(book.read ? 'have-read' : 'unread')
+    card.appendChild(bookTitle)
+    card.appendChild(bookAuthor)
+    card.appendChild(bookPages)
+    card.appendChild(bookRead)
     
-    card.appendChild(bookDiv)
-    parent.append(card)
 }
 
-const lotr = new Book("Lord of the Rings", "Tolkein", 300, true)
+function createBookObject() {
+    const title = document.getElementById('title').value
+    const author = document.getElementById('author').value
+    const pages = document.getElementById('pages').value
+    const read = document.getElementById('read').checked
+
+    const newBook = new Book(title, author, pages, read)
+
+    return newBook
+}
+
+
+//test books to populate page
+/* const lotr = new Book("Lord of the Rings", "Tolkein", 300, true)
 const hhg = new Book("Hitchhiker's Guide", "Adams", 250, true)
 const wok = new Book("Way of Kings", "Sanderson", 1000, true)
 
@@ -87,5 +79,5 @@ addBookToLibrary(hhg)
 addBookToLibrary(wok)
 
 myLibrary.forEach(book => {
-    addToPage2(book)
-});
+    addToPage(book)
+}); */
