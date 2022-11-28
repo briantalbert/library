@@ -2,10 +2,18 @@ let myLibrary = [];
 
 const submit = document.querySelector('.add')
 submit.addEventListener('click', () => {
-    const newBook = createBookObject()
-    addBookToLibrary(newBook)
-    addToPage(newBook)
+    alert('CREATING BOOK')
+    const title = document.getElementById('title').value
+    const author = document.getElementById('author').value
+    const pages = document.getElementById('pages').value
+    const read = document.getElementById('read').checked
+    console.log('new book info:', title, author, pages, read)
+    const newBook = new Book(title, author, pages, read)
+
+    newBook.addToPage()
 })
+
+
 
 function Book(title, author, pages, read){
     this.title = title
@@ -20,9 +28,38 @@ Book.prototype.info = function() {
         return infoString
 }
 
-function addBookToLibrary(book) {
-    myLibrary.push(book)
+Book.prototype.addToPage = function() {
+    const parent = document.querySelector('.booklist')
+    const card = document.createElement('div')
+    const bookInfo = document.createElement('div')
+    bookInfo.classList.add('book-info')
+    card.classList.add('book-card')
+    bookInfo.appendChild(card)
+    parent.appendChild(bookInfo)
+
+    const bookTitle = document.createElement('span')
+    const bookAuthor = document.createElement('span')
+    const bookPages = document.createElement('span')
+    const bookRead = document.createElement('span')
+
+    bookTitle.classList.add('title')
+    bookAuthor.classList.add('author')
+    bookPages.classList.add('pages')
+    bookRead.classList.add('read-status')
+
+    bookTitle.textContent = this.title
+    bookAuthor.textContent = this.author
+    bookPages.textContent = this.pages + " pages"
+    bookRead.textContent = this.read ? "Read" : "Not Read Yet"
+
+    card.classList.add(this.read ? 'have-read' : 'unread')
+    card.appendChild(bookTitle)
+    card.appendChild(bookAuthor)
+    card.appendChild(bookPages)
+    card.appendChild(bookRead)
 }
+
+
 
 
 function addToPage(book) {
@@ -57,16 +94,6 @@ function addToPage(book) {
     
 }
 
-function createBookObject() {
-    const title = document.getElementById('title').value
-    const author = document.getElementById('author').value
-    const pages = document.getElementById('pages').value
-    const read = document.getElementById('read').checked
-
-    const newBook = new Book(title, author, pages, read)
-
-    return newBook
-}
 
 
 //test books to populate page
@@ -81,3 +108,34 @@ addBookToLibrary(wok)
 myLibrary.forEach(book => {
     addToPage(book)
 }); */
+
+
+
+
+/*     const newBook = createBookObject()
+    console.log(newBook.title)
+    addBookToLibrary(newBook)
+    addToPage(newBook) */
+
+    /*
+    function createBookObject() {
+    console.log('CREATING BOOK')
+    const title = document.getElementById('title').value
+    const author = document.getElementById('author').value
+    const pages = document.getElementById('pages').value
+    const read = document.getElementById('read').checked
+    console.log('new book info:', title, author, pages, read)
+    const newBook = new Book(title, author, pages, read)
+
+    return newBook
+}
+
+
+
+
+
+
+function addBookToLibrary(book) {
+    myLibrary.push(book)
+}
+*/
