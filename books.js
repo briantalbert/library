@@ -2,17 +2,15 @@ let myLibrary = [];
 
 const submit = document.querySelector('.add')
 submit.addEventListener('click', () => {
-    alert('CREATING BOOK')
     const title = document.getElementById('title').value
     const author = document.getElementById('author').value
     const pages = document.getElementById('pages').value
     const read = document.getElementById('read').checked
-    console.log('new book info:', title, author, pages, read)
+
     const newBook = new Book(title, author, pages, read)
 
     newBook.addToPage()
 })
-
 
 
 function Book(title, author, pages, read){
@@ -20,12 +18,6 @@ function Book(title, author, pages, read){
     this.author = author
     this.pages = pages
     this.read = read
-}
-
-Book.prototype.info = function() {
-        readString = this.read ? "read" : "not read yet."
-        infoString = this.title + " by " + this.author + ", " + this.pages + " pages, " + readString
-        return infoString
 }
 
 Book.prototype.addToPage = function() {
@@ -59,6 +51,11 @@ Book.prototype.addToPage = function() {
     card.appendChild(bookRead)
 }
 
+Book.prototype.info = function() {
+    readString = this.read ? "read" : "not read yet."
+    infoString = this.title + " by " + this.author + ", " + this.pages + " pages, " + readString
+    return infoString
+}
 
 
 
