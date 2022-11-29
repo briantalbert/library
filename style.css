@@ -1,8 +1,16 @@
 
 .container {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    /*grid-template-columns: 1fr 1fr;*/
+    grid-template-columns: 25vw 25vw;
     grid-template-rows: 2em 100%;
+}
+
+.header>.title {
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bold;
+    padding: 3px;
+    color: whitesmoke;
 }
 
 .header {
@@ -31,7 +39,7 @@
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: repeat(4, 1fr);
-    
+    background-color: lightcoral;
     box-shadow: .5em .5em .4em grey;
     border-radius: 5px;
     width: 100%;
@@ -42,9 +50,6 @@
     background-color: darkkhaki;
 }
 
-.book-card.unread {
-    background-color: lightcoral;
-}
 
 .booklist {
     grid-template-columns: 1fr;

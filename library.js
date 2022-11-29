@@ -27,13 +27,21 @@ Bookshelf.prototype.addToPage = function(book) {
     bookTitle.textContent = book.title
     bookAuthor.textContent = book.author
     bookPages.textContent = book.pages + " pages"
-    bookRead.textContent = book.read ? "Read" : "Not Read Yet"
+    bookRead.textContent = (book.read ? "Read" : "Not Read Yet") + " [click to toggle]"
 
-    card.classList.add(book.read ? 'have-read' : 'unread')
+    if (book.read) {
+        card.classList.add('have-read')
+    }
+
     card.appendChild(bookTitle)
     card.appendChild(bookAuthor)
     card.appendChild(bookPages)
     card.appendChild(bookRead)
+
+    card.addEventListener('click', () => {
+        card.classList.toggle('have-read')
+        card.lastChild.innerText = (card.classList.contains('have-read') ? "Read" : "Not Read Yet") + " [click to toggle]"
+    })
 }
 
 function Book(title, author, pages, read) {
@@ -50,7 +58,6 @@ Book.prototype.showInfo = function() {
 function createBookObject() {
     infoFields = document.querySelectorAll('input')
     const newBook = new Book(infoFields[0].value, infoFields[1].value, infoFields[2].value, infoFields[3].checked)
-    console.log(newBook.title)
     myShelf.shelf.push(newBook)
     myShelf.addToPage(newBook)
 }
