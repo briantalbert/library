@@ -36,6 +36,7 @@
 
 .book-card {
     display: grid;
+    position: relative;
     grid-template-columns: 1fr;
     grid-template-rows: repeat(4, 1fr);
     background-color: lightcoral;
@@ -49,6 +50,11 @@
     background-color: darkkhaki;
 }
 
+.clicked {
+    top: .5em;
+    left: .5em;
+    box-shadow: none;
+}
 
 .booklist {
     grid-template-columns: 1fr;
@@ -112,3 +118,11 @@ form > div {
     grid-row: 5 / 6;
 }
 
+input:invalid {
+    border-color: #900;
+    background-color: #fdd;
+}
+  
+input:focus:invalid {
+    outline: none;
+}

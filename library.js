@@ -40,8 +40,12 @@ class Bookshelf {
         card.appendChild(bookPages)
         card.appendChild(bookRead)
 
-        card.addEventListener('click', () => {
+        card.addEventListener('mousedown', () => {
+            card.classList.toggle('clicked');
+        })
+        card.addEventListener('mouseup', () => {
             card.classList.toggle('have-read')
+            card.classList.toggle('clicked');
             card.lastChild.innerText = (card.classList.contains('have-read') ? "Read" : "Not Read Yet") + " [click to toggle]"
         })
     }
@@ -63,6 +67,41 @@ class Book {
 const myShelf = new Bookshelf()
 const infoFields = document.querySelectorAll('input')
 
+const title = document.getElementById("title");
+const author = document.getElementById("author");
+const pages = document.getElementById("pages");
+
+const titleError = document.querySelector("#title + span.error");
+const authorError = document.querySelector("#author + span.error");
+const pagesError = document.querySelector("#pages + span.error");
+
+title.addEventListener("input", (e) => {
+    if (title.validity.valid) {
+        titleError.textContent = "";
+        titleError.className = "error";
+    } else {
+        showError(title);
+    }
+})
+
+author.addEventListener("input", (e) => {
+    if (author.validity.valid) {
+        authorError.textContent = "";
+        authorError.className = "error";
+    } else {
+        showError(author);
+    }
+})
+
+pages.addEventListener("input", (e) => {
+    if (pages.validity.valid) {
+        pagesError.textContent = "";
+        pagesError.className = "error";
+    } else {
+        showError(pages);
+    }
+})
+
 const submitButton = document.querySelector('.add')
 submitButton.addEventListener('click', (e) => { 
     e.preventDefault()
@@ -70,3 +109,20 @@ submitButton.addEventListener('click', (e) => {
     myShelf.addToShelf(myBook)
     myShelf.addToPage(myBook)
 })
+
+function showError(element) {
+    const errorField = element.id;
+    switch (errorField) {
+        case "title":
+            
+            break;
+        case "author":
+
+            break;
+        case "pages":
+            
+            break;
+        default:
+            break;
+    }
+}
