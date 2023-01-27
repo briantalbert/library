@@ -71,15 +71,16 @@ const title = document.getElementById("title");
 const author = document.getElementById("author");
 const pages = document.getElementById("pages");
 
-const titleError = document.querySelector("#title + span.error");
-const authorError = document.querySelector("#author + span.error");
-const pagesError = document.querySelector("#pages + span.error");
+const titleError = document.querySelector(".titleerror");
+const authorError = document.querySelector(".authorerror");
+const pagesError = document.querySelector(".pageserror");
 
 title.addEventListener("input", (e) => {
     if (title.validity.valid) {
         titleError.textContent = "";
-        titleError.className = "error";
+        titleError.className = "titleerror";
     } else {
+        titleError.className = "error active";
         showError(title);
     }
 })
@@ -87,7 +88,7 @@ title.addEventListener("input", (e) => {
 author.addEventListener("input", (e) => {
     if (author.validity.valid) {
         authorError.textContent = "";
-        authorError.className = "error";
+        authorError.className = "authorerror";
     } else {
         showError(author);
     }
@@ -96,7 +97,7 @@ author.addEventListener("input", (e) => {
 pages.addEventListener("input", (e) => {
     if (pages.validity.valid) {
         pagesError.textContent = "";
-        pagesError.className = "error";
+        pagesError.className = "pageserror";
     } else {
         showError(pages);
     }
@@ -114,7 +115,13 @@ function showError(element) {
     const errorField = element.id;
     switch (errorField) {
         case "title":
-            
+            const titleError = document.querySelector('#title + span.error');
+            title.className = "error active";
+            if (title.validity.valueMissing) {
+                titleError.textContent = "You need to enter a title.";
+            } else if (title.validity.tooShort) {
+                titleError.textContent = "Title must be at least 5 characters.";
+            }
             break;
         case "author":
 
